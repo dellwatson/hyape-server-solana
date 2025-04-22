@@ -1,12 +1,12 @@
 [package]
-name = "multiplayer_rooms"  # Changed to match Anchor.toml
+name = "game_server"  # Changed to match Anchor.toml
 version = "0.2.2"
 description = "Created with Bolt"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "multiplayer_rooms"  # Changed to match package name
+name = "game_server"  # Changed to match package name
 
 [features]
 no-entrypoint = []
@@ -20,4 +20,7 @@ custom-heap = []
 custom-panic = []
 
 [dependencies]
+# Remove the explicit solana-program dependency
 bolt-lang = { workspace = true }
+anchor-lang = { workspace = true }
+ephemeral-rollups-sdk = { version = "0.2.1", features = ["anchor"] }

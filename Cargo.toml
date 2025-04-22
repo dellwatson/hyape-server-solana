@@ -5,7 +5,16 @@ members = [
 resolver = "2"
 
 [workspace.dependencies]
-bolt-lang = "0.2.2"
+bolt-lang = "0.1.9"
+anchor-lang = "0.30.1"
+# solana-program = "1.17.0"
+# solana-sdk = "1.17.0"
+# spl-token = "3.1.0"
+# spl-token-swap = "0.1.0"
+# spl-token-metadata = "1.0.0"
+# spl-token-lending = "0.1.0"
+# spl-token-vault = "0.1.0"
+
 
 [profile.release]
 overflow-checks = true
