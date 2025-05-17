@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::{program::invoke, system_instruction};
 
-declare_id!("PRIZE_POOL_PROGRAM_ID_PLACEHOLDER");
+declare_id!("J55jqUopQBb5oy1X6wkhrfmmZo9KXcQ5CU3NqS7PviiT");
 
 // Constants
 pub const PRIZE_ESCROW_SEED: &[u8] = b"prize-escrow";
@@ -13,6 +13,7 @@ pub mod prize_pool {
 
     // Deposit funds to the prize pool for a specific room
     // would also receive signature from game server
+    // should transfer into PDA-PLAYER-STATE so when commit program can distribute the reward back
     pub fn UNSAFE_deposit(ctx: Context<Deposit>, room_id: String, amount: u64) -> Result<()> {
         let prize_pool = &mut ctx.accounts.prize_pool;
         let player = &ctx.accounts.player;
