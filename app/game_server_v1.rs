@@ -32,7 +32,7 @@ pub struct PlayerState {
     pub rotation: Rotation,      // Player's rotation
     pub animation_id: u8,        // Simple animation ID
     pub model_id: u8,            // Simple model ID  
-    pub room_id: String,         // Room ID as string (e.g. "4aa2a8047921aa6a8e218b3ae69f57512b3f7c18")
+    pub room_id: u8,             // Room ID
     pub player: Pubkey,          // Player's address
 }
 
@@ -50,7 +50,7 @@ pub mod game_server {
         player_state.rotation = Rotation::default();
         player_state.animation_id = 0;
         player_state.model_id = 0;
-        player_state.room_id = String::new();
+        player_state.room_id = 0;
         player_state.player = ctx.accounts.user.key();
         
         msg!("Player state initialized");
@@ -72,7 +72,7 @@ pub mod game_server {
     // Update player state (similar to anchor_counter's increment)
     pub fn update_player(
         ctx: Context<UpdatePlayerState>, 
-        room_id: String,
+        room_id: u8,
         animation_id: u8,
         model_id: u8,
         position: Position,
@@ -85,7 +85,7 @@ pub mod game_server {
         player_state.rotation = rotation;
         player_state.animation_id = animation_id;
         player_state.model_id = model_id;
-        player_state.room_id = room_id.clone();
+        player_state.room_id = room_id;
         
         msg!("Updated player state for room {}", room_id);
         Ok(())
@@ -124,8 +124,7 @@ pub struct Initialize<'info> {
     #[account(
         init,
         payer = user,
-        space = 8 + 12 + 16 + 1 + 1 + (4 + 40) + 32, // Account discriminator + PlayerState fields
-                                        // 4 bytes for string length + 40 bytes for room_id string
+        space = 8 + 12 + 16 + 1 + 1 + 1 + 32, // Account discriminator + PlayerState fields
         seeds = [PLAYER_STATE_SEED],
         bump
     )]
